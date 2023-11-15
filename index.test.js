@@ -85,6 +85,8 @@ describe("Band, Musician, and Song Models", () => {
     await musician.destroy();
     const deletedMusician = await Musician.findByPk(1);
     expect(deletedMusician).toBe(null);
+
+    console.log("hi");
   });
 
   test("can delete a Song", async () => {
