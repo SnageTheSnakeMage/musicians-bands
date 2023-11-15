@@ -1,16 +1,16 @@
-const { sequelize } = require("./db");
-const { Band, Musician, Song } = require("./index");
+const { sequelize } = require('./db');
+const { Band, Musician, Song } = require('./index')
 
-describe("Band, Musician, and Song Models", () => {
-  /**
-   * Runs the code prior to all tests
-   */
-  beforeAll(async () => {
-    // the 'sync' method will create tables based on the model class
-    // by setting 'force:true' the tables are recreated each time the
-    // test suite is run
-    await sequelize.sync({ force: true });
-  });
+describe('Band, Musician, and Song Models', () => {
+    /**
+     * Runs the code prior to all tests
+     */
+    beforeAll(async () => {
+        // the 'sync' method will create tables based on the model class
+        // by setting 'force:true' the tables are recreated each time the 
+        // test suite is run
+        await sequelize.sync({ force: true });
+    })
 
   test("can create a Band", async () => {
     // TODO - test creating a band
@@ -85,8 +85,6 @@ describe("Band, Musician, and Song Models", () => {
     await musician.destroy();
     const deletedMusician = await Musician.findByPk(1);
     expect(deletedMusician).toBe(null);
-
-    console.log("hi");
   });
 
   test("can delete a Song", async () => {
