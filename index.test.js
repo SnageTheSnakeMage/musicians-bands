@@ -14,17 +14,22 @@ describe('Band, Musician, and Song Models', () => {
 
     test('can create a Band', async () => {
         // TODO - test creating a band
-        expect('NO TEST').toBe('EXPECTED VALUE HERE');
+        const band = await Band.create({name: 'Led Zeppelin', genre: 'Rock'});
+        expect(band.name).toBe('Led Zeppelin');
     })
 
     test('can create a Musician', async () => {
         // TODO - test creating a musician
-        expect('NO TEST').toBe('EXPECTED VALUE HERE');
+        await Musician.create({name: 'Robert Plant', instrument: 'Voice'});
+        const musician = await Musician.findOne({ where: {instrument: "Voice"}});
+        expect(musician.instrument).toBe('Voice');
     })
 
     test('can update a Band', async () => {
         // TODO - test updating a band
-        expect('NO TEST').toBe('EXPECTED VALUE HERE');
+        const band = await Band.findOne({where: {name: 'Led Zeppelin'}});
+        const updatedBand = await band.update({name: "Rolling Stones"});
+        expect(updatedBand.name).toBe('Rolling Stones');
     })
 
     test('can update a Musician', async () => {
