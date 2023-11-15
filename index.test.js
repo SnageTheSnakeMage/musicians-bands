@@ -25,6 +25,11 @@ describe('Band, Musician, and Song Models', () => {
         expect(musician.instrument).toBe('Voice');
     })
 
+    test('can create a Song', async () => {
+        const song = await Song.create({ title: 'RISK RISK RISK!', year: 2023, length: 5 })
+        expect(song.title).toBe('RISK RISK RISK!');
+    })
+
     test('can update a Band', async () => {
         // TODO - test updating a band
         const band = await Band.findOne({where: {name: 'Led Zeppelin'}});
@@ -37,13 +42,26 @@ describe('Band, Musician, and Song Models', () => {
         expect('NO TEST').toBe('EXPECTED VALUE HERE');
     })
 
+    test('can update a Song', async () => {
+        // TODO - test updating a song
+        expect('NO TEST').toBe('EXPECTED VALUE HERE');
+    })
+
     test('can delete a Band', async () => {
         // TODO - test deleting a band
-        expect('NO TEST').toBe('EXPECTED VALUE HERE');
+        const band = await Band.findByPk(1)
+        await band.destroy()
+        const deletedBand = await Band.findByPk(1)
+        expect(deletedBand).toBe(null);
     })
 
     test('can delete a Musician', async () => {
         // TODO - test deleting a musician
+        expect('NO TEST').toBe('EXPECTED VALUE HERE');
+    })
+
+    test('can delete a Song', async () => {
+        // TODO - test deleting a song
         expect('NO TEST').toBe('EXPECTED VALUE HERE');
     })
 })
