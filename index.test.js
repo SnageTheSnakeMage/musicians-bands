@@ -18,6 +18,8 @@ describe('Band, Musician, and Song Models', () => {
         expect(band.name).toBe('Led Zeppelin');
     })
 
+
+    
     test('can create a Musician', async () => {
         // TODO - test creating a musician
         await Musician.create({name: 'Robert Plant', instrument: 'Voice'});
