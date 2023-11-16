@@ -14,7 +14,7 @@ describe('Band, Musician, and Song Models', () => {
 
   test("can create a Band", async () => {
     // TODO - test creating a band
-    const band = await Band.create({ name: "Led Zeppelin", genre: "Rock" });
+    const band = await Band.create({ name: "Led Zeppelin", genre: "Rock", showCount: 600});
     expect(band.name).toBe("Led Zeppelin");
   });
 
@@ -93,5 +93,11 @@ describe('Band, Musician, and Song Models', () => {
     await song.destroy();
     const deletedSong = await Song.findByPk(1);
     expect(deletedSong).toBe(null);
+  });
+  test('Can create a new Band with showcount', async () =>{
+    const band = await Band.create({name: "Led Zeppelin", genre: "Rock", showCount: 600});
+    expect(band.name).toBe("Led Zeppelin");
+    expect(band.genre).toBe("Rock");
+    expect(band.showCount).toBe(600);
   });
 });
