@@ -1,5 +1,5 @@
 const { sequelize } = require('./db');
-const { Band, Musician, Song } = require('./index')
+const { Band, Musician, Song, Manager } = require('./index')
 
 describe('Band, Musician, and Song Models', () => {
     /**
@@ -137,6 +137,15 @@ describe('Band, Musician, and Song Models', () => {
     expect(songs[1].title).toBe("Song 2");
 
   })
-
-
+  //test for One to one relationship between Band <-> Manager
+  test("Band can have one Manager", async () =>{
+      const mrMan = await Manager.create({name: "Man", email: "man@gmail.com", salary: "59000", dateHired: new Date()})
+      const allBands = await Band.findAll()
+      await mrMan.setBand(allBands[0])
+      console.log(mrMan)
+      console.log(allBands[0])
+      const mrMansBand = await mrMan.getBand()
+      console.log(mrMansBand)
+      expect(mrMansBand.name).toBe("Led Zeppelin")
+  })
 });
