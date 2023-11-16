@@ -100,4 +100,18 @@ describe('Band, Musician, and Song Models', () => {
     expect(band.genre).toBe("Rock");
     expect(band.showCount).toBe(600);
   });
+  //test to define associations of band and musicion
+  test('Band and Musician association',  async () => {
+    const band = await Band.create({name: 'Queen', genre: 'Rock', showCount: 600});
+    const musician = await Musician.create({ name: 'bob', instrument: 'guitar'});
+
+    await band.addMusician(musician);
+    expect(band.genre).toBe('Rock');
+     const foundBand = await Band.findOne({where: {name: 'Queen'}});
+    
+    const musicians = await foundBand.getMusicians();
+    // console.log(foundBand);
+    expect(musicians[0].name).toBe('bob');
+  });
+
 });
