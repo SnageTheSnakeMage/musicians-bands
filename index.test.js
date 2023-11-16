@@ -114,4 +114,29 @@ describe('Band, Musician, and Song Models', () => {
     expect(musicians[0].name).toBe('bob');
   });
 
+  test('Song and Band many-to-many association', async () => {
+    const song1 = await Song.create({title: "Song 1", year: 2001, length: 3});
+    const song2 = await Song.create({title: "Song 2", year: 2001, length: 7});
+
+    const band1 = await Band.create({name: "The Beatles", genre: "Rock", showCount: 350});
+    const band2 = await Band.create({name: "Aerosmith", genre: "Rock", showCount: 200});
+
+    await song1.addBands([band1, band2]);
+    await band1.addSongs([song1, song2]);
+
+    const bands = await song1.getBands();
+    const songs = await band1.getSongs();
+
+    expect(bands.length).toBe(2);
+    expect(songs.length).toBe(2);
+
+    expect(bands[0].name).toBe("The Beatles");
+    expect(bands[1].name).toBe("Aerosmith");
+
+    expect(songs[0].title).toBe("Song 1");
+    expect(songs[1].title).toBe("Song 2");
+
+  })
+
+
 });
